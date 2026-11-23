@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.env
+.pytest_cache/
+
+# Dados brutos e saídas (ficam fora do repositório)
+dados_rd80/
+saida/
+runs/
+data/
+aparelhos_novos/*/amostras/
+benchmarks/results/geracao_*/
+*.nc
+*.cdf
+
+# IDE / sistema
+.vscode/
+.idea/
+.DS_Store

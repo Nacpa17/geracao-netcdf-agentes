@@ -1,0 +1,670 @@
+{
+  "_sobre": "Molde gerado por geracao_netcdf.molde a partir de sgpldE13.b1.20230829.000000.cdf em 2026-11-09. 'Optional': true = não gravar; 'value': '__AUTO__' = o código preenche. Ajustado para o ATTO: raw_spectrum com as dimensões na ordem real dos dados (velocidade, tamanho), fall_velocity_calculated por classe de tamanho, área nominal 0.0054 m^2 (o arquivo da ARM diz 0.54 m^2, mas o próprio number_density_drops da ARM usa 54 cm^2) — ver geracao_netcdf/aparelhos/parsivel2/DOCUMENTACAO.md.",
+  "_revisar": [
+    "global platform_id: 'ld' é o código da ARM para o Parsivel²; confirmar o nome no ATTO",
+    "global datastream 'attldCA.b1', site_id 'att' e facility_id 'CA': confirmar",
+    "variáveis lat/lon/alt: copiadas do RD-80 (mesmo sítio ATTO-Campina); confirmar a posição do Parsivel²",
+    "global doi e dod_version: TBD (não reaproveitar o DOI da ARM)",
+    "global Conventions 'ARM-1.2' e data_level 'b1': decidir com o grupo (o RD-80 usa 'CF-1.8, ARM-1.2')",
+    "variáveis do telegrama (weather_code, mor_visibility, snow_depth_intensity, laserband_amplitude, sensor_temperature, heating_current, sensor_voltage...): marcar 'Optional': true as que o logger do ATTO não grava"
+  ],
+  "global attributes": {
+    "command_line": {
+      "value": "__AUTO__",
+      "Optional": false
+    },
+    "process_version": {
+      "value": "__AUTO__",
+      "Optional": false
+    },
+    "dod_version": {
+      "value": "TBD",
+      "Optional": false
+    },
+    "Conventions": {
+      "value": "ARM-1.2",
+      "Optional": false
+    },
+    "data_level": {
+      "value": "b1",
+      "Optional": false
+    },
+    "platform_id": {
+      "value": "ld",
+      "Optional": false
+    },
+    "input_source": {
+      "value": "__AUTO__",
+      "Optional": false
+    },
+    "site_id": {
+      "value": "att",
+      "Optional": false
+    },
+    "location_description": {
+      "value": "ATTO-Campina site, Amazonas, Brazil",
+      "Optional": false
+    },
+    "facility_id": {
+      "value": "CA",
+      "Optional": false
+    },
+    "sampling_interval": {
+      "value": "1 minute",
+      "Optional": false
+    },
+    "effective_measurement_area": {
+      "value": "0.0054 m^2",
+      "Optional": false
+    },
+    "doi": {
+      "value": "TBD",
+      "Optional": false
+    },
+    "datastream": {
+      "value": "attldCA.b1",
+      "Optional": false
+    },
+    "history": {
+      "value": "__AUTO__",
+      "Optional": false
+    }
+  },
+  "dimensions": {
+    "time": "arquivo diário: o núcleo cria",
+    "particle_size": 32,
+    "raw_fall_velocity": 32
+  },
+  "variables": {
+    "base_time": {
+      "Datatype": "int32",
+      "dimensions": [],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Base time in Epoch",
+      "units": "seconds since 1970-1-1 0:00:00 0:00",
+      "ancillary_variables": "time_offset"
+    },
+    "time_offset": {
+      "Datatype": "float64",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Time offset from base_time",
+      "units": "seconds since YYYY-MM-DD 00:00:00 0:00",
+      "ancillary_variables": "base_time"
+    },
+    "time": {
+      "Datatype": "float64",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Time offset from midnight",
+      "units": "seconds since YYYY-MM-DD 00:00:00 0:00",
+      "standard_name": "time"
+    },
+    "precip_rate": {
+      "Datatype": "float32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Precipitation intensity",
+      "units": "mm/hr",
+      "missing_value": -9999.0,
+      "valid_min": 0.0,
+      "valid_max": 99.999,
+      "standard_name": "lwe_precipitation_rate",
+      "ancillary_variables": "qc_precip_rate"
+    },
+    "qc_precip_rate": {
+      "Datatype": "int32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Quality check results on field: Precipitation intensity",
+      "units": "1",
+      "description": "This field contains bit packed integer values, where each bit represents a QC test on the data. Non-zero bits indicate the QC condition given in the description for those bits; a value of 0 (no bits set) indicates the data has not failed any QC tests.",
+      "flag_method": "bit",
+      "bit_1_description": "Value is equal to missing_value.",
+      "bit_1_assessment": "Bad",
+      "bit_2_description": "Value is less than the valid_min.",
+      "bit_2_assessment": "Bad",
+      "bit_3_description": "Value is greater than the valid_max.",
+      "bit_3_assessment": "Bad"
+    },
+    "weather_code": {
+      "Datatype": "int16",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "SYNOP WaWa Table 4680",
+      "units": "1",
+      "missing_value": -9999,
+      "valid_min": 0,
+      "valid_max": 90,
+      "ancillary_variables": "qc_weather_code"
+    },
+    "qc_weather_code": {
+      "Datatype": "int32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Quality check results on field: SYNOP WaWa Table 4680",
+      "units": "1",
+      "description": "This field contains bit packed integer values, where each bit represents a QC test on the data. Non-zero bits indicate the QC condition given in the description for those bits; a value of 0 (no bits set) indicates the data has not failed any QC tests.",
+      "flag_method": "bit",
+      "bit_1_description": "Value is equal to missing_value.",
+      "bit_1_assessment": "Bad",
+      "bit_2_description": "Value is less than the valid_min.",
+      "bit_2_assessment": "Bad",
+      "bit_3_description": "Value is greater than the valid_max.",
+      "bit_3_assessment": "Bad"
+    },
+    "equivalent_radar_reflectivity_ott": {
+      "Datatype": "float32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Radar reflectivity from the manufacturer's software",
+      "units": "dBZ",
+      "missing_value": -9999.0,
+      "valid_min": -60.0,
+      "valid_max": 250.0,
+      "ancillary_variables": "qc_equivalent_radar_reflectivity_ott"
+    },
+    "qc_equivalent_radar_reflectivity_ott": {
+      "Datatype": "int32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Quality check results on field: Radar reflectivity from the manufacturer's software",
+      "units": "1",
+      "description": "This field contains bit packed integer values, where each bit represents a QC test on the data. Non-zero bits indicate the QC condition given in the description for those bits; a value of 0 (no bits set) indicates the data has not failed any QC tests.",
+      "flag_method": "bit",
+      "bit_1_description": "Value is equal to missing_value.",
+      "bit_1_assessment": "Bad",
+      "bit_2_description": "Value is less than the valid_min.",
+      "bit_2_assessment": "Bad",
+      "bit_3_description": "Value is greater than the valid_max.",
+      "bit_3_assessment": "Bad"
+    },
+    "number_detected_particles": {
+      "Datatype": "int32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Number of particles detected",
+      "units": "count",
+      "missing_value": -9999,
+      "valid_min": 0,
+      "valid_max": 99999,
+      "ancillary_variables": "qc_number_detected_particles"
+    },
+    "qc_number_detected_particles": {
+      "Datatype": "int32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Quality check results on field: Number of particles detected",
+      "units": "1",
+      "description": "This field contains bit packed integer values, where each bit represents a QC test on the data. Non-zero bits indicate the QC condition given in the description for those bits; a value of 0 (no bits set) indicates the data has not failed any QC tests.",
+      "flag_method": "bit",
+      "bit_1_description": "Value is equal to missing_value.",
+      "bit_1_assessment": "Bad",
+      "bit_2_description": "Value is less than the valid_min.",
+      "bit_2_assessment": "Bad",
+      "bit_3_description": "Value is greater than the valid_max.",
+      "bit_3_assessment": "Bad"
+    },
+    "mor_visibility": {
+      "Datatype": "int32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Meteorological optical range visibility",
+      "units": "m",
+      "missing_value": -9999,
+      "valid_min": 0,
+      "valid_max": 20000,
+      "standard_name": "visibility_in_air",
+      "ancillary_variables": "qc_mor_visibility"
+    },
+    "qc_mor_visibility": {
+      "Datatype": "int32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Quality check results on field: Meteorological optical range visibility",
+      "units": "1",
+      "description": "This field contains bit packed integer values, where each bit represents a QC test on the data. Non-zero bits indicate the QC condition given in the description for those bits; a value of 0 (no bits set) indicates the data has not failed any QC tests.",
+      "flag_method": "bit",
+      "bit_1_description": "Value is equal to missing_value.",
+      "bit_1_assessment": "Bad",
+      "bit_2_description": "Value is less than the valid_min.",
+      "bit_2_assessment": "Bad",
+      "bit_3_description": "Value is greater than the valid_max.",
+      "bit_3_assessment": "Bad"
+    },
+    "snow_depth_intensity": {
+      "Datatype": "float32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "New snow height",
+      "units": "mm/hr",
+      "missing_value": -9999.0,
+      "valid_min": 0.0,
+      "valid_max": 99.999,
+      "ancillary_variables": "qc_snow_depth_intensity",
+      "comment": "This value is valid on a short period of one hour and its purpose is to provide new snow height on railways or roads for the purposes of safety.  It is not equivalent to the WMO definition of snow intensity nor does if follow from WMO observation guide lines."
+    },
+    "qc_snow_depth_intensity": {
+      "Datatype": "int32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Quality check results on field: New snow height",
+      "units": "1",
+      "description": "This field contains bit packed integer values, where each bit represents a QC test on the data. Non-zero bits indicate the QC condition given in the description for those bits; a value of 0 (no bits set) indicates the data has not failed any QC tests.",
+      "flag_method": "bit",
+      "bit_1_description": "Value is equal to missing_value.",
+      "bit_1_assessment": "Bad",
+      "bit_2_description": "Value is less than the valid_min.",
+      "bit_2_assessment": "Bad",
+      "bit_3_description": "Value is greater than the valid_max.",
+      "bit_3_assessment": "Bad"
+    },
+    "laserband_amplitude": {
+      "Datatype": "int32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Laserband amplitude",
+      "units": "count",
+      "missing_value": -9999,
+      "valid_min": 0,
+      "valid_max": 99999,
+      "ancillary_variables": "qc_laserband_amplitude"
+    },
+    "qc_laserband_amplitude": {
+      "Datatype": "int32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Quality check results on field: Laserband amplitude",
+      "units": "1",
+      "description": "This field contains bit packed integer values, where each bit represents a QC test on the data. Non-zero bits indicate the QC condition given in the description for those bits; a value of 0 (no bits set) indicates the data has not failed any QC tests.",
+      "flag_method": "bit",
+      "bit_1_description": "Value is equal to missing_value.",
+      "bit_1_assessment": "Bad",
+      "bit_2_description": "Value is less than the valid_min.",
+      "bit_2_assessment": "Bad",
+      "bit_3_description": "Value is greater than the valid_max.",
+      "bit_3_assessment": "Bad"
+    },
+    "sensor_temperature": {
+      "Datatype": "int16",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Temperature in sensor",
+      "units": "degC",
+      "missing_value": -9999,
+      "valid_min": -100,
+      "valid_max": 100
+    },
+    "heating_current": {
+      "Datatype": "float32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Heating current",
+      "units": "A",
+      "missing_value": -9999.0,
+      "valid_min": 0.0,
+      "valid_max": 9.9,
+      "ancillary_variables": "qc_heating_current"
+    },
+    "qc_heating_current": {
+      "Datatype": "int32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Quality check results on field: Heating current",
+      "units": "1",
+      "description": "This field contains bit packed integer values, where each bit represents a QC test on the data. Non-zero bits indicate the QC condition given in the description for those bits; a value of 0 (no bits set) indicates the data has not failed any QC tests.",
+      "flag_method": "bit",
+      "bit_1_description": "Value is equal to missing_value.",
+      "bit_1_assessment": "Bad",
+      "bit_2_description": "Value is less than the valid_min.",
+      "bit_2_assessment": "Bad",
+      "bit_3_description": "Value is greater than the valid_max.",
+      "bit_3_assessment": "Bad"
+    },
+    "sensor_voltage": {
+      "Datatype": "float32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Sensor voltage",
+      "units": "V",
+      "missing_value": -9999.0,
+      "valid_min": 0.0,
+      "valid_max": 99.9,
+      "ancillary_variables": "qc_sensor_voltage"
+    },
+    "qc_sensor_voltage": {
+      "Datatype": "int32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Quality check results on field: Sensor voltage",
+      "units": "1",
+      "description": "This field contains bit packed integer values, where each bit represents a QC test on the data. Non-zero bits indicate the QC condition given in the description for those bits; a value of 0 (no bits set) indicates the data has not failed any QC tests.",
+      "flag_method": "bit",
+      "bit_1_description": "Value is equal to missing_value.",
+      "bit_1_assessment": "Bad",
+      "bit_2_description": "Value is less than the valid_min.",
+      "bit_2_assessment": "Bad",
+      "bit_3_description": "Value is greater than the valid_max.",
+      "bit_3_assessment": "Bad"
+    },
+    "particle_size": {
+      "Datatype": "float32",
+      "dimensions": [
+        "particle_size"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Particle class size average",
+      "units": "mm"
+    },
+    "class_size_width": {
+      "Datatype": "float32",
+      "dimensions": [
+        "particle_size"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Class size width",
+      "units": "mm",
+      "missing_value": -9999.0
+    },
+    "raw_fall_velocity": {
+      "Datatype": "float32",
+      "dimensions": [
+        "raw_fall_velocity"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Fall velocity classes observed by Parsivel2",
+      "units": "m/s"
+    },
+    "fall_velocity_calculated": {
+      "Datatype": "float32",
+      "dimensions": [
+        "particle_size"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Fall velocity calculated after Lhermite",
+      "units": "m/s",
+      "missing_value": -9999.0,
+      "comment": "Terminal fall velocity (Lhermitte) of each SIZE class; used in number_density_drops."
+    },
+    "raw_spectrum": {
+      "Datatype": "int32",
+      "dimensions": [
+        "time",
+        "raw_fall_velocity",
+        "particle_size"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Raw drop size distribution",
+      "units": "count",
+      "missing_value": -9999,
+      "comment": "Counts per fall velocity class (first) and size class (second), as the instrument telegram orders them. ARM ld.b1 files store the same layout but declare the dimensions as (time, particle_size, raw_fall_velocity)."
+    },
+    "liquid_water_content": {
+      "Datatype": "float32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Liquid water content",
+      "units": "mm^3/m^3",
+      "missing_value": -9999.0
+    },
+    "equivalent_radar_reflectivity": {
+      "Datatype": "float32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Radar reflectivity calculated by the ingest",
+      "units": "dBZ",
+      "missing_value": -9999.0
+    },
+    "intercept_parameter": {
+      "Datatype": "float32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Intercept parameter, assuming an ideal Marshall-Palmer type distribution",
+      "units": "1/(m^3 mm)",
+      "missing_value": -9999.0
+    },
+    "slope_parameter": {
+      "Datatype": "float32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Slope parameter, assuming an ideal Marshall-Palmer type distribution",
+      "units": "1/mm",
+      "missing_value": -9999.0
+    },
+    "median_volume_diameter": {
+      "Datatype": "float32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Median volume diameter, assuming an ideal Marshall-Palmer type distribution",
+      "units": "mm",
+      "missing_value": -9999.0
+    },
+    "liquid_water_distribution_mean": {
+      "Datatype": "float32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Liquid water distribution mean, assuming an ideal Marshall-Palmer type distribution",
+      "units": "mm",
+      "missing_value": -9999.0
+    },
+    "number_density_drops": {
+      "Datatype": "float32",
+      "dimensions": [
+        "time",
+        "particle_size"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Number density of drops of the diameter corresponding to a particular drop size class per unit volume",
+      "units": "1/(m^3 mm)",
+      "missing_value": -9999.0,
+      "comment": "N(D_i) = sum_j counts[j, i] / (A dt v(D_i) dD_i), A = 0.0054 m^2 (nominal 54 cm^2), dt = 60 s, v = fall_velocity_calculated; reproduces ARM ld.b1 (ld-b1-2.0)."
+    },
+    "diameter_min": {
+      "Datatype": "float32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Diameter of smallest drop observed",
+      "units": "mm",
+      "missing_value": -9999.0
+    },
+    "diameter_max": {
+      "Datatype": "float32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Diameter of largest drop observed",
+      "units": "mm",
+      "missing_value": -9999.0
+    },
+    "moment1": {
+      "Datatype": "float32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Moment 1 from the observed distribution",
+      "units": "mm/m^3",
+      "missing_value": -9999.0
+    },
+    "moment2": {
+      "Datatype": "float32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Moment 2 from the observed distribution",
+      "units": "mm^2/m^3",
+      "missing_value": -9999.0
+    },
+    "moment3": {
+      "Datatype": "float32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Moment 3 from the observed distribution",
+      "units": "mm^3/m^3",
+      "missing_value": -9999.0
+    },
+    "moment4": {
+      "Datatype": "float32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Moment 4 from the observed distribution",
+      "units": "mm^4/m^3",
+      "missing_value": -9999.0
+    },
+    "moment5": {
+      "Datatype": "float32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Moment 5 from the observed distribution",
+      "units": "mm^5/m^3",
+      "missing_value": -9999.0
+    },
+    "moment6": {
+      "Datatype": "float32",
+      "dimensions": [
+        "time"
+      ],
+      "Optional": false,
+      "value": "__AUTO__",
+      "long_name": "Moment 6 from the observed distribution",
+      "units": "mm^6/m^3",
+      "missing_value": -9999.0
+    },
+    "lat": {
+      "Datatype": "float32",
+      "dimensions": [],
+      "Optional": false,
+      "value": -2.1815896,
+      "long_name": "North latitude",
+      "units": "degree_N",
+      "valid_min": -90.0,
+      "valid_max": 90.0,
+      "standard_name": "latitude"
+    },
+    "lon": {
+      "Datatype": "float32",
+      "dimensions": [],
+      "Optional": false,
+      "value": -59.0218639,
+      "long_name": "East longitude",
+      "units": "degree_E",
+      "valid_min": -180.0,
+      "valid_max": 180.0,
+      "standard_name": "longitude"
+    },
+    "alt": {
+      "Datatype": "float32",
+      "dimensions": [],
+      "Optional": false,
+      "value": 59.0,
+      "long_name": "Altitude above mean sea level",
+      "units": "m",
+      "standard_name": "altitude"
+    }
+  }
+}

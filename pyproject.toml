@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "geracao-netcdf"
+version = "1.0.0"
+description = "Geração de NetCDF no padrão ARM/CF a partir de arquivos brutos de instrumentos, com agentes de modelos de linguagem."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Eduardo Ribeiro do Amparo Rodrigues de Souza" }]
+keywords = ["netcdf", "arm", "cf-conventions", "disdrometer", "rd-80", "parsivel", "llm-agents", "atto"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Atmospheric Science",
+]
+dependencies = [
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "netCDF4>=1.6",
+    "pyyaml>=6.0.1",
+    "requests>=2.31",
+]
+
+[project.optional-dependencies]
+# Agente com modelo local (--llm hf:<modelo>); instale antes o PyTorch da sua máquina.
+llm = ["transformers>=4.40", "accelerate", "bitsandbytes"]
+dev = ["pytest>=8.0"]
+
+[project.urls]
+Homepage = "https://github.com/Nacpa17/geracao-netcdf-agentes"
+"Fases anteriores da IC" = "https://github.com/Nacpa17/assistente-metadados-ambientais"
+
+[tool.setuptools.packages.find]
+include = ["geracao_netcdf*"]
+namespaces = true
+
+[tool.setuptools.package-data]
+geracao_netcdf = ["aparelhos/*/*.json", "aparelhos/*/*.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
